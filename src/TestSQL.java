@@ -6,8 +6,10 @@ public class TestSQL {
             Class.forName("org.sqlite.JDBC");
             Connection conn = DriverManager.getConnection("jdbc:sqlite:My_cats.db");
             Statement stat = conn.createStatement();
-            stat.execute("CREATE TABLE if not exist 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE," +
-                    "'type' VARCHAR(100) NOT NULL");
+            stat.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
+                    "'type' VARCHAR(100) NOT NULL)");
+            conn.close();
+            stat.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println("JDBC הנאיגונ הכÿ ÑÓÁÄ םו םאיהום!");
