@@ -117,6 +117,26 @@ public class DB {
         }
     }
 
+    public static void deleteType(int id) {
+        try {
+            stat = conn.createStatement();
+            stat.executeUpdate("DELETE FROM 'types' WHERE id = " + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка SQL!");
+        }
+    }
+
+    public static void updateType(int id, String newType) {
+        try {
+            stat = conn.createStatement();
+            stat.executeUpdate("UPDATE 'types' SET type = '" + newType + "' WHERE id = " + id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка SQL!");
+        }
+    }
+
     public static void close() throws SQLException {
         conn.close();
         stat.close();
