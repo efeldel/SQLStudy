@@ -1,21 +1,11 @@
 import java.sql.*;
 
 public class TestSQL {
-    public static void main(String[] args) throws ClassNotFoundException {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            Connection conn = DriverManager.getConnection("jdbc:sqlite:My_cats.db");
-            Statement stat = conn.createStatement();
-            stat.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-                    "'type' VARCHAR(100) NOT NULL)");
-            conn.close();
-            stat.close();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("JDBC драйвер для СУБД не найден!");
-        } catch (SQLException e) {
-            e.printStackTrace();
-            System.out.println("Ошибка SQL!");
-        }
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        DB.conn();
+        DB.insertType("Абиссинская кошка");
+        DB.insertType("Австралийский мист");
+        DB.insertType("Американская жесткошерстная");
+        DB.close();
     }
 }
