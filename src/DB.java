@@ -21,20 +21,20 @@ public class DB {
         try {
             stat = conn.createStatement();
             stat.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
-                    "'type' VARCHAR(100) NOT NULL)");
+                    "'type' VARCHAR(100) UNIQUE NOT NULL)");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Ошибка SQL!");
         }
     }
 
-    public static void insertType(String type) throws SQLException {
+    public static void insertType(String type) {
         try {
             stat = conn.createStatement();
-            stat.execute("INSERT INTO 'types' ('type') VALUES ('" + type + "')");
+            stat.executeUpdate("INSERT INTO 'types' ('type') VALUES ('" + type + "')");
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Ошибка SQL!");
+            System.out.println(type + " уже существует");
         }
     }
 
