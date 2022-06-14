@@ -137,6 +137,43 @@ public class DB {
         }
     }
 
+    public static String getType(int id) throws SQLException {
+        try {
+            stat = conn.createStatement();
+            res = stat.executeQuery("SELECT type FROM 'types' WHERE id = "+ id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка SQL!");
+        }
+        return res.getString("type");
+    }
+    public static void getTypeWhere (String where) throws SQLException {
+        try {
+            stat = conn.createStatement();
+            res = stat.executeQuery("SELECT type FROM 'types' WHERE "+ where);
+            System.out.println("Породы кошек подходящие под условия: " + where +":");
+            while(res.next()) {
+                System.out.println(res.getString("type"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка SQL!");
+        }
+    }
+    public static void getAllTypes() throws SQLException {
+        try {
+            stat = conn.createStatement();
+            res = stat.executeQuery("SELECT type FROM 'types' WHERE 1");
+            System.out.println("Породы кошек:");
+            while(res.next()) {
+                System.out.println(res.getString("type"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка SQL!");
+        }
+    }
+
     public static void close() throws SQLException {
         conn.close();
         stat.close();
