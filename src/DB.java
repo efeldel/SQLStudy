@@ -93,7 +93,24 @@ public class DB {
             System.out.println("Ошибка SQL!");
         }
     }
+    public static void insertCat(String name, String type, int age, Double weight) {
+        try {
+            stat = conn.createStatement();
+            res = null;
+            res = stat.executeQuery("SELECT id FROM types WHERE type ='" + type + "'");
+            if (!res.next()) {
+                insertType(type);
+                res = stat.executeQuery("SELECT id FROM types WHERE type ='" + type + "'");
+            }
+            stat.executeUpdate("INSERT INTO 'cats' ('name', 'type_id', 'age', 'weight') " +
+                    "VALUES ('" + name + "', '" + res.getInt("id") + "', '"
+            + age + "', '" + weight + "')");
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Ошибка SQL!");
+        }
+    }
     public static void insertType(String type) {
         try {
             stat = conn.createStatement();
@@ -179,8 +196,6 @@ public class DB {
     }
 
     public static void close() throws SQLException {
-        //res.close();
-        //stat.close();
         conn.close();
     }
 }
