@@ -84,6 +84,10 @@ public class DB {
             stat = conn.createStatement();
             stat.execute("CREATE TABLE if not exists 'types' ('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
                     "'type' VARCHAR(100) UNIQUE NOT NULL)");
+            stat.execute("CREATE TABLE if not exists 'cats' ('id' INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, " +
+                    "'name' VARCHAR(20) NOT NULL, 'type_id' INTEGER NOT NULL," +
+                    "'age' INTEGER NOT NULL, 'weight' DOUBLE," +
+                    "FOREIGN KEY (type_id) REFERENCES types (id))");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("Ошибка SQL!");
@@ -175,7 +179,8 @@ public class DB {
     }
 
     public static void close() throws SQLException {
+        //res.close();
+        //stat.close();
         conn.close();
-        stat.close();
     }
 }
