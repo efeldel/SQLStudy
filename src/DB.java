@@ -250,6 +250,18 @@ public class DB {
             }
         }
     }
+    public static void deleteCat(int id) throws SQLException {
+        stat = conn.createStatement();
+        stat.executeUpdate("DELETE FROM 'cats' WHERE 'id' = " + id);
+    }
+    public static void deleteCat(String where) throws SQLException {
+        stat = conn.createStatement();
+        stat.executeUpdate("DELETE FROM 'cats' WHERE " + where);
+    }
+    public static void updateCat(String set, String where) throws SQLException {
+        stat = conn.createStatement();
+        stat.executeUpdate("UPDATE 'cats' SET " + set + " WHERE " + where);
+    }
     public static void insertType(String type) {
         try {
             stat = conn.createStatement();
